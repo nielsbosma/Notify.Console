@@ -41,26 +41,15 @@ public sealed class SystemCommand : Command<SystemCommand.Settings>
 
     private static void ShowWindows(string title, string description)
     {
-        var titleXml = System.Security.SecurityElement.Escape(title);
-        var descXml = System.Security.SecurityElement.Escape(description);
-
         var script = $"""
-            [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
-            [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null
-            $xml = @"
-            <toast>
-              <visual>
-                <binding template='ToastGeneric'>
-                  <text>{titleXml}</text>
-                  <text>{descXml}</text>
-                </binding>
-              </visual>
-            </toast>
-            "@
-            $doc = [Windows.Data.Xml.Dom.XmlDocument]::new()
-            $doc.LoadXml($xml)
-            $toast = [Windows.UI.Notifications.ToastNotification]::new($doc)
-            [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier('Notify.Console').Show($toast)
+            Add-Type -AssemblyName System.Windows.Forms
+            $n = New-Object System.Windows.Forms.NotifyIcon
+            $n.Icon = [System.Drawing.SystemIcons]::Information
+            $n.BalloonTipTitle = '{title.Replace("'", "''")}'
+            $n.BalloonTipText = '{description.Replace("'", "''")}'
+            $n.Visible = $true
+            $n.ShowBalloonTip(5000)
+            Start-Sleep -Milliseconds 100
             """;
 
         var encoded = Convert.ToBase64String(Encoding.Unicode.GetBytes(script));
