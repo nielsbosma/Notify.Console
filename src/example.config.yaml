@@ -1,0 +1,6 @@
+# Notify.Console configuration
+# Add profiles under each notification provider.
+
+slack:
+  my-profile:
+    webhook_url: YOUR_WEBHOOK_URL_HERE
