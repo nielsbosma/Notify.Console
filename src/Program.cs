@@ -10,6 +10,9 @@ app.Configure(config =>
 
     config.AddCommand<SlackCommand>("slack")
         .WithDescription("Send a Slack message using a config profile");
+
+    config.AddCommand<MessageBoxCommand>("messagebox")
+        .WithDescription("Show a native OS message box dialog");
 });
 
 return app.Run(args);
