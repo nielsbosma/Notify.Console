@@ -13,6 +13,9 @@ app.Configure(config =>
 
     config.AddCommand<MessageBoxCommand>("messagebox")
         .WithDescription("Show a native OS message box dialog");
+
+    config.AddCommand<EmailCommand>("email")
+        .WithDescription("Send an email using a config profile");
 });
 
 return app.Run(args);
