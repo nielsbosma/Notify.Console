@@ -24,7 +24,7 @@
   <ItemGroup>
     <PackageReference Include="Spectre.Console.Cli" Version="1.0.0-alpha.0.15" />
     <PackageReference Include="YamlDotNet" Version="16.3.0" />
-    <PackageReference Include="Google.Apis.Gmail.v1" Version="1.68.0.3661" />
+    <PackageReference Include="Google.Apis.Gmail.v1" Version="1.69.0.3742" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.71" />
   </ItemGroup>
 
